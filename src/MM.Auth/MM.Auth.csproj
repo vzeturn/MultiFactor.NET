@@ -3,6 +3,10 @@
   <PropertyGroup>
     <PackageId>MM.Auth</PackageId>
     <Description>Multi-factor authentication core: factor abstraction, orchestration, storage and secret-protection seams. No database driver, no cipher, no factor implementation.</Description>
+    <!-- The xunit PackageReference below sets IsTestProject=true via xunit.core.props, which
+         makes the SDK default IsPackable to false. This project ships as a real NuGet package
+         despite carrying xunit as a runtime dependency, so IsPackable is forced back on. -->
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
