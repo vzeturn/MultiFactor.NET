@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="src/MM.Auth/MM.Auth.csproj" />
+  <Project Path="src/MM.Auth.Totp/MM.Auth.Totp.csproj" />
+  <Project Path="src/MM.Auth.Sqlite/MM.Auth.Sqlite.csproj" />
+  <Project Path="src/MM.Auth.Crypto.Aes/MM.Auth.Crypto.Aes.csproj" />
+  <Project Path="tests/MM.Auth.Tests/MM.Auth.Tests.csproj" />
+  <Project Path="tests/MM.Auth.Totp.Tests/MM.Auth.Totp.Tests.csproj" />
+  <Project Path="tests/MM.Auth.Sqlite.Tests/MM.Auth.Sqlite.Tests.csproj" />
+  <Project Path="tests/MM.Auth.Crypto.Aes.Tests/MM.Auth.Crypto.Aes.Tests.csproj" />
+</Solution>

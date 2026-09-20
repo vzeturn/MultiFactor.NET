@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>MM.Auth</PackageId>
+    <Description>Multi-factor authentication core: factor abstraction, orchestration, storage and secret-protection seams. No database driver, no cipher, no factor implementation.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
+    <!-- xunit + AwesomeAssertions are real runtime dependencies of this package because
+         Testing/MfaRepositoryConformanceTests.cs ships inside it: any adapter author gets
+         the behavioural suite by referencing MM.Auth alone. -->
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="AwesomeAssertions" Version="9.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
