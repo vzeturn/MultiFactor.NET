@@ -22,6 +22,9 @@
     <!-- MfaOptions.Table(string) is internal by design (see MfaOptions.cs); the test project
          needs to exercise it directly rather than only through public behaviour. -->
     <InternalsVisibleTo Include="MM.Auth.Tests" />
+    <!-- SqliteMfaRepository (Task 8) calls MfaOptions.Table(string) to build its SQL text; the
+         method is internal by design, so the adapter assembly needs visibility into it. -->
+    <InternalsVisibleTo Include="MM.Auth.Sqlite" />
   </ItemGroup>
 
 </Project>

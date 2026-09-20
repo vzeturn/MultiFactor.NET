@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>MM.Auth.Sqlite</PackageId>
+    <Description>SQLite IMfaRepository adapter for MM.Auth, using Dapper.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
+    <!-- SQLitePCLRaw.lib.e_sqlite3 2.1.12+: patches GHSA-2m69-gcr7-jv3q (NU1903).
+         Direct reference overrides Microsoft.Data.Sqlite's transitive 2.1.11,
+         winning NuGet resolution without requiring a bump to the pinned package. -->
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MM.Auth\MM.Auth.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
