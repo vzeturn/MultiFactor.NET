@@ -18,4 +18,10 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- MfaOptions.Table(string) is internal by design (see MfaOptions.cs); the test project
+         needs to exercise it directly rather than only through public behaviour. -->
+    <InternalsVisibleTo Include="MM.Auth.Tests" />
+  </ItemGroup>
+
 </Project>
