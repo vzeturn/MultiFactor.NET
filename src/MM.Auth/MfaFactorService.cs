@@ -14,9 +14,17 @@ public sealed class MfaFactorService(
     ISecretProtector protector,
     MfaOptions options) : IMfaFactorService
 {
-    private const string PendingContext = "pending";
-    private const string SecretContext = "secret";
     private const int PayloadFieldCount = 4;
+
+    /// <summary>
+    /// AAD for a pending-enrollment blob. Rooted in <see cref="MfaOptions.ProtectionContext"/> so two
+    /// hosts sharing a key provider cannot swap ciphertext, and distinguished from
+    /// <see cref="SecretContext"/> so a pending blob can never be replayed as a completed secret.
+    /// </summary>
+    private string PendingContext => options.ProtectionContext + "|pending";
+
+    /// <summary>AAD for a stored, completed secret. See <see cref="PendingContext"/>.</summary>
+    private string SecretContext => options.ProtectionContext + "|secret";
 
     private readonly IReadOnlyList<IMfaFactor> _factors = [.. factors];
 

@@ -141,7 +141,8 @@ public class MfaFactorServiceTests
 
         stored.Should().NotBeNull();
         stored.Should().NotEqual(Encoding.UTF8.GetBytes(TotpSecret));
-        (await _protector.UnprotectAsync(stored!, "secret")).Should().Equal(Encoding.UTF8.GetBytes(TotpSecret));
+        (await _protector.UnprotectAsync(stored!, "MM.PdaOrder.Auth|secret"))
+            .Should().Equal(Encoding.UTF8.GetBytes(TotpSecret));
     }
 
     [Fact]
