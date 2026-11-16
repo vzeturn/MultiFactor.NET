@@ -21,9 +21,9 @@ services.AddSingleton<IMfaConnectionFactory, MyConnectionFactory>();
 
 services.AddMmAuth(o => o with
 {
-    Issuer = "MM.PdaOrder",
-    ProtectionContext = "MM.PdaOrder.Auth",
-    TablePrefix = "pda_",
+    Issuer = "MyApp",
+    ProtectionContext = "MyApp.Auth",
+    TablePrefix = "app_",
 });
 
 services.AddMmAuthSqlite();

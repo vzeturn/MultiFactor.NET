@@ -7,9 +7,9 @@ public class TotpFactorTests
 {
     private static readonly MfaOptions Options = new MfaOptions
     {
-        Issuer = "MM.PdaOrder",
-        ProtectionContext = "MM.PdaOrder.Auth",
-        TablePrefix = "pda_",
+        Issuer = "MyApp",
+        ProtectionContext = "MyApp.Auth",
+        TablePrefix = "app_",
     }.Validate();
 
     private readonly TotpFactor _factor = new(Options);
@@ -48,7 +48,7 @@ public class TotpFactorTests
         var uri = start.Data["otpAuthUri"];
 
         uri.Should().StartWith("otpauth://totp/");
-        uri.Should().Contain("issuer=MM.PdaOrder");
+        uri.Should().Contain("issuer=MyApp");
         uri.Should().Contain("secret=" + Base32Encoding.ToString(start.PlaintextSecret));
         uri.Should().Contain("digits=6");
         uri.Should().Contain("period=30");

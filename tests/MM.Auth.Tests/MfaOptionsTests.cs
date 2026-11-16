@@ -4,9 +4,9 @@ public class MfaOptionsTests
 {
     private static MfaOptions Valid() => new()
     {
-        Issuer = "MM.PdaOrder",
-        ProtectionContext = "MM.PdaOrder.Auth",
-        TablePrefix = "pda_",
+        Issuer = "MyApp",
+        ProtectionContext = "MyApp.Auth",
+        TablePrefix = "app_",
     };
 
     [Fact]
@@ -33,9 +33,9 @@ public class MfaOptionsTests
 
     [Theory]
     [InlineData("bad-prefix")]
-    [InlineData("Pda_")]
-    [InlineData("1pda_")]
-    [InlineData("pda ")]
+    [InlineData("App_")]
+    [InlineData("1app_")]
+    [InlineData("app ")]
     public void An_unsafe_table_prefix_throws(string prefix) =>
         Assert.Throws<ArgumentException>(() => (Valid() with { TablePrefix = prefix }).Validate());
 
@@ -60,5 +60,5 @@ public class MfaOptionsTests
 
     [Fact]
     public void Table_names_are_the_prefix_plus_mfa_plus_suffix() =>
-        Valid().Table("secret").Should().Be("pda_mfa_secret");
+        Valid().Table("secret").Should().Be("app_mfa_secret");
 }

@@ -10,9 +10,9 @@ public sealed class SqliteMfaRepositoryConformanceTests : MfaRepositoryConforman
 {
     private static MfaOptions Options() => new MfaOptions
     {
-        Issuer = "MM.PdaOrder",
-        ProtectionContext = "MM.PdaOrder.Auth",
-        TablePrefix = "pda_",
+        Issuer = "MyApp",
+        ProtectionContext = "MyApp.Auth",
+        TablePrefix = "app_",
     }.Validate();
 
     private readonly List<TestDb> _dbs = [];

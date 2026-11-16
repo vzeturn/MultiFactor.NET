@@ -6,27 +6,27 @@ namespace MM.Auth.Sqlite.Tests;
 
 public class SqliteMfaSchemaTests
 {
-    private static MfaOptions Options(string prefix = "pda_") => new MfaOptions
+    private static MfaOptions Options(string prefix = "app_") => new MfaOptions
     {
-        Issuer = "MM.PdaOrder",
-        ProtectionContext = "MM.PdaOrder.Auth",
+        Issuer = "MyApp",
+        ProtectionContext = "MyApp.Auth",
         TablePrefix = prefix,
     }.Validate();
 
     [Fact]
     public void The_ddl_names_all_three_tables_with_the_prefix()
     {
-        var ddl = SqliteMfaSchema.GetDdl("pda_");
+        var ddl = SqliteMfaSchema.GetDdl("app_");
 
-        ddl.Should().Contain("pda_mfa_secret");
-        ddl.Should().Contain("pda_mfa_backup_code");
-        ddl.Should().Contain("pda_mfa_challenge");
+        ddl.Should().Contain("app_mfa_secret");
+        ddl.Should().Contain("app_mfa_backup_code");
+        ddl.Should().Contain("app_mfa_challenge");
     }
 
     [Fact]
     public void The_ddl_uses_no_database_specific_time_functions()
     {
-        var ddl = SqliteMfaSchema.GetDdl("pda_");
+        var ddl = SqliteMfaSchema.GetDdl("app_");
 
         ddl.Should().NotContain("strftime");
         ddl.Should().NotContain("datetime(");
@@ -35,7 +35,7 @@ public class SqliteMfaSchemaTests
     [Fact]
     public void The_secret_table_is_keyed_by_subject_and_factor_kind()
     {
-        var ddl = SqliteMfaSchema.GetDdl("pda_");
+        var ddl = SqliteMfaSchema.GetDdl("app_");
 
         ddl.Should().Contain("PRIMARY KEY (initial, factor_kind)");
     }
@@ -51,9 +51,9 @@ public class SqliteMfaSchemaTests
         var names = (await conn.QueryAsync<string>(
             "SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name")).ToList();
 
-        names.Should().Contain("pda_mfa_secret");
-        names.Should().Contain("pda_mfa_backup_code");
-        names.Should().Contain("pda_mfa_challenge");
+        names.Should().Contain("app_mfa_secret");
+        names.Should().Contain("app_mfa_backup_code");
+        names.Should().Contain("app_mfa_challenge");
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class SqliteMfaSchemaTests
         await SqliteMfaSchema.EnsureAsync(conn, Options());
 
         (await conn.ExecuteScalarAsync<int>(
-            "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'pda_mfa_secret'"))
+            "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'app_mfa_secret'"))
             .Should().Be(1);
     }
 

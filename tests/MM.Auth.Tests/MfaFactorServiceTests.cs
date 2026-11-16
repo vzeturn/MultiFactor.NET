@@ -10,9 +10,9 @@ public class MfaFactorServiceTests
 
     private static MfaOptions Options() => new MfaOptions
     {
-        Issuer = "MM.PdaOrder",
-        ProtectionContext = "MM.PdaOrder.Auth",
-        TablePrefix = "pda_",
+        Issuer = "MyApp",
+        ProtectionContext = "MyApp.Auth",
+        TablePrefix = "app_",
     }.Validate();
 
     private readonly FakeRepository _repo = new();
@@ -141,7 +141,7 @@ public class MfaFactorServiceTests
 
         stored.Should().NotBeNull();
         stored.Should().NotEqual(Encoding.UTF8.GetBytes(TotpSecret));
-        (await _protector.UnprotectAsync(stored!, "MM.PdaOrder.Auth|secret"))
+        (await _protector.UnprotectAsync(stored!, "MyApp.Auth|secret"))
             .Should().Equal(Encoding.UTF8.GetBytes(TotpSecret));
     }
 
@@ -241,9 +241,9 @@ public class MfaFactorServiceTests
         services.AddSingleton<IMfaFactor>(_totp);
         services.AddMmAuth(o => o with
         {
-            Issuer = "MM.PdaOrder",
-            ProtectionContext = "MM.PdaOrder.Auth",
-            TablePrefix = "pda_",
+            Issuer = "MyApp",
+            ProtectionContext = "MyApp.Auth",
+            TablePrefix = "app_",
         });
 
         using var provider = services.BuildServiceProvider(validateScopes: true);
@@ -259,9 +259,9 @@ public class MfaFactorServiceTests
         var services = new ServiceCollection();
         services.AddMmAuth(o => o with
         {
-            Issuer = "MM.PdaOrder",
-            ProtectionContext = "MM.PdaOrder.Auth",
-            TablePrefix = "pda_",
+            Issuer = "MyApp",
+            ProtectionContext = "MyApp.Auth",
+            TablePrefix = "app_",
         });
 
         services.Should().NotContain(d => d.ServiceType == typeof(IMfaRepository));

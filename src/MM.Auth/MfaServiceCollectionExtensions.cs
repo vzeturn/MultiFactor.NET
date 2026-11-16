@@ -20,7 +20,7 @@ public static class MfaServiceCollectionExtensions
     /// <param name="services">The service collection to register into.</param>
     /// <param name="configure">
     /// Receives a seed <see cref="MfaOptions"/> and returns the configured one, e.g.
-    /// <c>o =&gt; o with { Issuer = "MM.PdaOrder", ProtectionContext = "...", TablePrefix = "pda_" }</c>.
+    /// <c>o =&gt; o with { Issuer = "MyApp", ProtectionContext = "...", TablePrefix = "app_" }</c>.
     /// </param>
     public static IServiceCollection AddMmAuth(
         this IServiceCollection services, Func<MfaOptions, MfaOptions> configure)
